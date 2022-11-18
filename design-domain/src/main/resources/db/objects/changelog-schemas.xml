@@ -6,5 +6,8 @@
     <changeSet logicalFilePath="db/objects/schemas" author="nmalinchik" id="schemas-01">
         <sql>create schema lesson</sql>
         <sql>create schema student</sql>
+        <sql>create schema employee</sql>
+        <sql>create schema academic_performance</sql>
+        <sql>create schema timetable</sql>
     </changeSet>
 </databaseChangeLog>

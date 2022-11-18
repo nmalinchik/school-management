@@ -3,8 +3,16 @@
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <include file="lesson/lesson.sql"       relativeToChangelogFile="true"/>
-    <include file="student/grade.sql"       relativeToChangelogFile="true"/>
-    <include file="student/student.sql"       relativeToChangelogFile="true"/>
+    <include file="lesson/lesson.sql"               relativeToChangelogFile="true"/>
+    <include file="student/grade.sql"               relativeToChangelogFile="true"/>
+    <include file="student/student.sql"             relativeToChangelogFile="true"/>
+    <include file="employee/position.sql"           relativeToChangelogFile="true"/>
+    <include file="employee/employee.sql"           relativeToChangelogFile="true"/>
+    <include file="academicperformance/mark.sql"    relativeToChangelogFile="true"/>
+    <include file="timetable/timetable_day.sql"          relativeToChangelogFile="true"/>
+    <include file="timetable/timetable_lesson.sql"       relativeToChangelogFile="true"/>
+    <include file="timetable/timetable_day_lesson.sql"   relativeToChangelogFile="true"/>
+    <include file="timetable/timetable_week.sql"         relativeToChangelogFile="true"/>
+    <include file="timetable/timetable_week_day.sql"     relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

@@ -5,6 +5,9 @@
 
     <include file="lesson.sql"      relativeToChangelogFile="true"/>
     <include file="grade.sql"       relativeToChangelogFile="true"/>
-    <include file="student.sql"       relativeToChangelogFile="true"/>
+    <include file="student.sql"     relativeToChangelogFile="true"/>
+    <include file="employee.sql"    relativeToChangelogFile="true"/>
+    <include file="mark.sql"        relativeToChangelogFile="true"/>
+    <include file="timetable.sql"   relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
