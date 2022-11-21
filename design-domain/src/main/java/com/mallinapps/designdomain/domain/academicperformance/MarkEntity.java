@@ -44,7 +44,4 @@ public class MarkEntity extends Versioned {
     @JoinColumn(name = "employee_id")
     private EmployeeEntity teacher;
 
-
-
-
 }

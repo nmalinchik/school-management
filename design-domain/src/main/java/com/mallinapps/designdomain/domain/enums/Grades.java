@@ -1,6 +1,6 @@
 package com.mallinapps.designdomain.domain.enums;
 
-public enum Grade {
+public enum Grades {
     FIRST(1),
     SECOND(2),
     THIRD(3),
@@ -15,5 +15,5 @@ public enum Grade {
 
     final int value;
 
-    Grade(final int value) {this.value = value;}
+    Grades(final int value) {this.value = value;}
 }

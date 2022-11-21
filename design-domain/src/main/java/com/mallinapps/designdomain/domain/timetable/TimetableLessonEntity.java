@@ -42,7 +42,7 @@ public class TimetableLessonEntity extends Versioned {
 
     @ManyToOne
     @JoinColumn(name = "grade_id")
-    private GradeEntity gradeEntity;
+    private GradeEntity grade;
 
     @ManyToOne
     @JoinColumn(name = "lesson_id")

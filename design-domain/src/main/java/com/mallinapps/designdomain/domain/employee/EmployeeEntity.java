@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 import com.mallinapps.designdomain.domain.base.Versioned;
-import com.mallinapps.designdomain.domain.student.GradeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,10 +38,10 @@ public class EmployeeEntity extends Versioned {
 
     @ManyToOne
     @JoinColumn(name = "position_id")
-    private Position position;
+    private PositionEntity position;
 
     @ManyToOne
     @JoinColumn(name = "extra_position_id")
-    private Position extraPosition;
+    private PositionEntity extraPosition;
 
 }
