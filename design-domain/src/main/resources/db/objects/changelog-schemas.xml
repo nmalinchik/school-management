@@ -9,5 +9,6 @@
         <sql>create schema employee</sql>
         <sql>create schema academic_performance</sql>
         <sql>create schema timetable</sql>
+        <sql>create schema attendance</sql>
     </changeSet>
 </databaseChangeLog>
