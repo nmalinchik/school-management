@@ -2,6 +2,7 @@ package com.mallinapps.designdomain.domain.employee;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,6 +15,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +39,7 @@ public class EmployeeEntity extends Versioned {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id")
     private PositionEntity position;
 

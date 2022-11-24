@@ -21,7 +21,6 @@
 
     <modules>
         <module>design-domain</module>
-        <module>admin-service</module>
         <module>common</module>
     </modules>
 

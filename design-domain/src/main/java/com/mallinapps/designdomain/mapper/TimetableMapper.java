@@ -1,10 +1,8 @@
-package com.mallinapps.commondto.mapstruct;
+package com.mallinapps.designdomain.mapper;
 
 import com.mallinapps.commondto.dto.timetable.TimetableDay;
 import com.mallinapps.commondto.dto.timetable.TimetableLesson;
 import com.mallinapps.commondto.dto.timetable.TimetableWeek;
-import com.mallinapps.commondto.mapstruct.LessonMapper;
-import com.mallinapps.commondto.mapstruct.StudentMapper;
 import com.mallinapps.designdomain.domain.timetable.TimetableDayEntity;
 import com.mallinapps.designdomain.domain.timetable.TimetableLessonEntity;
 import com.mallinapps.designdomain.domain.timetable.TimetableWeekEntity;

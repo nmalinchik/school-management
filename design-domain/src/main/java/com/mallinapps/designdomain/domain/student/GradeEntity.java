@@ -29,7 +29,7 @@ public class GradeEntity extends BusinessEntity {
 
     @Column(name = "letter")
     private String letter;
-
+        //todo Добавить unique на grade + letter
     //todo добавить классного руководителя
 
 }

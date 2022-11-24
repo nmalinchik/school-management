@@ -1,13 +1,9 @@
-package com.mallinapps.commondto.mapstruct;
+package com.mallinapps.designdomain.mapper;
 
 import com.mallinapps.commondto.dto.attendance.Attendance;
 import com.mallinapps.commondto.dto.attendance.AttendancePresence;
-import com.mallinapps.commondto.dto.employee.Employee;
-import com.mallinapps.commondto.dto.employee.Position;
 import com.mallinapps.designdomain.domain.attendance.AttendanceEntity;
 import com.mallinapps.designdomain.domain.attendance.AttendancePresenceEntity;
-import com.mallinapps.designdomain.domain.employee.EmployeeEntity;
-import com.mallinapps.designdomain.domain.employee.PositionEntity;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;

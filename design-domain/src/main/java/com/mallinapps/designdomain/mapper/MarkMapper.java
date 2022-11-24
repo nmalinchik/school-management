@@ -1,7 +1,7 @@
-package com.mallinapps.commondto.mapstruct;
+package com.mallinapps.designdomain.mapper;
 
-import com.mallinapps.commondto.dto.lesson.Lesson;
-import com.mallinapps.designdomain.domain.lesson.LessonEntity;
+import com.mallinapps.commondto.dto.academicperformance.Mark;
+import com.mallinapps.designdomain.domain.academicperformance.MarkEntity;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -9,10 +9,11 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
+        uses = {LessonMapper.class, EmployeeMapper.class, StudentMapper.class},
         builder = @Builder(disableBuilder = true))
-public interface LessonMapper {
+public interface MarkMapper {
 
-    Lesson toLesson(LessonEntity entity);
+    Mark toMark(MarkEntity entity);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
@@ -20,6 +21,6 @@ public interface LessonMapper {
     @Mapping(target = "lastUpdatedBy", ignore = true)
     @Mapping(target = "lastUpdateDate", ignore = true)
     @Mapping(target = "version", ignore = true)
-    LessonEntity toLessonEntity(Lesson lesson);
+    MarkEntity toMarkEntity(Mark mark);
 
 }
