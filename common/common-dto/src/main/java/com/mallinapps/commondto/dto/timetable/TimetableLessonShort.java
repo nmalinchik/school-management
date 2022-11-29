@@ -4,19 +4,22 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.mallinapps.commondto.dto.enums.LessonPosition;
-import com.mallinapps.commondto.dto.lesson.Lesson;
-import com.mallinapps.commondto.dto.student.Grade;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class TimetableLesson {
+@AllArgsConstructor
+@NoArgsConstructor
+public class TimetableLessonShort {
 
     private UUID id;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LessonPosition position;
-    private Lesson lesson;
+    private UUID lessonId;
+    private UUID dayId;
 
 }

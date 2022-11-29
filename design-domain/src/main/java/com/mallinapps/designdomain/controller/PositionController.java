@@ -7,6 +7,7 @@ import com.mallinapps.commondto.dto.employee.PositionList;
 import com.mallinapps.designdomain.controller.api.CrudApi;
 import com.mallinapps.designdomain.service.PositionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,23 +19,23 @@ public class PositionController implements CrudApi<PositionList, Position> {
     private final PositionService service;
 
     @Override
-    public PositionList getList(final Integer page, final Integer size) {
-        return service.getList(page, size);
+    public ResponseEntity<PositionList> getList(final Integer page, final Integer size) {
+        return ResponseEntity.ok().body(service.getList(page, size));
     }
 
     @Override
-    public Position findById(final UUID id) {
-        return service.findById(id);
+    public ResponseEntity<Position> findById(final UUID id) {
+        return ResponseEntity.ok().body(service.findById(id));
     }
 
     @Override
-    public Position create(final Position position) {
-        return service.create(position);
+    public ResponseEntity<Position> create(final Position position) {
+        return ResponseEntity.ok().body(service.create(position));
     }
 
     @Override
-    public Position update(final UUID id, final Position position) {
-        return service.update(id, position);
+    public ResponseEntity<Position> update(final UUID id, final Position position) {
+        return ResponseEntity.ok().body(service.update(id, position));
     }
 
     @Override

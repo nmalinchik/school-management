@@ -2,8 +2,8 @@
 create table timetable.timetable_day
 (
       id                                        uuid                        not null,
-      day_date                                  DATE                         not null,
-      grade_id                                  uuid                        not null,
+      day_date                                  DATE                        not null,
+      week_id                                   uuid                        not null,
 
       created_by                                varchar(255)                not null,
       creation_date                             timestamp without time zone not null,
@@ -12,14 +12,15 @@ create table timetable.timetable_day
       object_version_number                     bigint                      not null,
 
       constraint timetable_day_pk            primary key (id),
-      constraint timetable_day_grade_fk      foreign key (grade_id) references student.grade
+      constraint timetable_day_week_fk       foreign key (week_id) references timetable.timetable_week
+
 );
 
 comment on table timetable.timetable_day is 'Day timetable';
 
 comment on column timetable.timetable_day.id is 'Unique ID of entity';
 comment on column timetable.timetable_day.day_date is 'Date of timetable day';
-comment on column timetable.timetable_day.grade_id is 'Id of the grade';
+comment on column timetable.timetable_day.week_id is 'Id of timetable week';
 
 COMMENT ON column timetable.timetable_day.created_by IS 'User who create the entity';
 COMMENT ON column timetable.timetable_day.creation_date IS 'Date when the entity was created';

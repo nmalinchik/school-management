@@ -1,17 +1,17 @@
 package com.mallinapps.designdomain.domain.timetable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
 
 import com.mallinapps.designdomain.domain.base.Versioned;
-import com.mallinapps.designdomain.domain.student.GradeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,15 +31,10 @@ public class TimetableDayEntity extends Versioned {
     private LocalDate dayDate;
 
     @ManyToOne
-    @JoinColumn(name = "grade_id")
-    private GradeEntity grade;
+    @JoinColumn(name = "week_id")
+    private TimetableWeekEntity week;
 
-    @ManyToMany
-    @JoinTable(
-            schema = "timetable",
-            name = "timetable_day_lesson",
-            joinColumns = @JoinColumn(name = "timetable_day_id"),
-            inverseJoinColumns = @JoinColumn(name = "timetable_lesson_id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "day", orphanRemoval = true)
     private List<TimetableLessonEntity> timetableLessons;
 
 }

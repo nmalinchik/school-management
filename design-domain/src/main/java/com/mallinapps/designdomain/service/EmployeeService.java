@@ -9,33 +9,39 @@ import com.mallinapps.designdomain.domain.employee.EmployeeEntity;
 import com.mallinapps.designdomain.mapper.EmployeeMapper;
 import com.mallinapps.designdomain.repository.PositionRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
-public class EmployeeService extends CrudService<EmployeeList, Employee, EmployeeEntity> {
+public class EmployeeService extends CrudService<Employee, EmployeeEntity> {
 
     private final EmployeeMapper mapper;
     private final PositionRepository positionRepository;
 
+    @Transactional(readOnly = true)
     public Employee findById(final UUID id) {
-        log.info("find entity with id {}", id);
-        var entity = findEntityById(id);
-        return mapper.toEmployee(entity);
+        return mapper.toEmployee(findEntityById(id));
     }
 
+    @Transactional(readOnly = true)
     public EmployeeList getList(final Integer page, final Integer size) {
-        log.info("get employee list for selected page");
         return mapper.toEmployeeList(repository.findAll(), new PageRequest(page, size));
     }
 
+    @Transactional
     public Employee create(final Employee employee) {
-        log.info("create employee from dto:{}", employee);
         var entity = mapper.toEmployeeEntity(employee);
         savePositionIfNeed(entity);
         final var saved = repository.save(entity);
+        return mapper.toEmployee(saved);
+    }
+
+    @Transactional
+    public Employee update(final UUID id, final Employee employee) {
+        var entity = mapper.updateEmployeeEntity(employee, findEntityById(id));
+        savePositionIfNeed(entity);
+        var saved = repository.save(entity);
         return mapper.toEmployee(saved);
     }
 
@@ -46,14 +52,6 @@ public class EmployeeService extends CrudService<EmployeeList, Employee, Employe
         if (entity.getExtraPosition() != null && entity.getExtraPosition().getId() == null) {
             entity.setExtraPosition(positionRepository.save(entity.getExtraPosition()));
         }
-    }
-
-    public Employee update(final UUID id, final Employee employee) {
-        log.info("update employee with id = {} from dto:{}", id, employee);
-        var entity = mapper.updateEmployeeEntity(employee, findEntityById(id));
-        savePositionIfNeed(entity);
-        var saved = repository.save(entity);
-        return mapper.toEmployee(saved);
     }
 
 }

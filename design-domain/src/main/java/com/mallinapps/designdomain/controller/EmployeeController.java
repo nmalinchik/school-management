@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,32 +40,32 @@ public class EmployeeController implements CrudApi<EmployeeList, Employee> {
     @ApiResponse(responseCode = OpenApi.ProblemSchema.StatusCode.OK, description = OpenApi.Descriptions.EMPLOYEE_FIND_BY_ID,
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Employee.class)))
     @Operation(summary = "Find an employees by id")
-    public Employee findById(final UUID id) {
-        return employeeService.findById(id);
+    public ResponseEntity<Employee> findById(final UUID id) {
+        return ResponseEntity.ok().body(employeeService.findById(id));
     }
 
     @Override
     @ApiResponse(responseCode = OpenApi.ProblemSchema.StatusCode.OK, description = OpenApi.Descriptions.EMPLOYEE_FIND_ALL,
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = EmployeeList.class)))
     @Operation(summary = "Find all employees")
-    public EmployeeList getList(final Integer page, final Integer size) {
-        return employeeService.getList(page, size);
+    public ResponseEntity<EmployeeList> getList(final Integer page, final Integer size) {
+        return ResponseEntity.ok().body(employeeService.getList(page, size));
     }
 
     @Override
     @ApiResponse(responseCode = OpenApi.ProblemSchema.StatusCode.OK, description = OpenApi.Descriptions.EMPLOYEE_CREATE,
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Employee.class)))
     @Operation(summary = "Create new employee")
-    public Employee create(final Employee employee) {
-        return employeeService.create(employee);
+    public ResponseEntity<Employee> create(final Employee employee) {
+        return ResponseEntity.ok().body(employeeService.create(employee));
     }
 
     @Override
     @ApiResponse(responseCode = OpenApi.ProblemSchema.StatusCode.OK, description = OpenApi.Descriptions.EMPLOYEE_UPDATE,
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Employee.class)))
     @Operation(summary = "Update the employee")
-    public Employee update(final UUID id, final Employee employee) {
-        return employeeService.update(id, employee);
+    public ResponseEntity<Employee> update(final UUID id, final Employee employee) {
+        return ResponseEntity.ok().body(employeeService.update(id, employee));
     }
 
     @Override

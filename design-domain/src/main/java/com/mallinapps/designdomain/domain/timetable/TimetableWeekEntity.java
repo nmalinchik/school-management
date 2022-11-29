@@ -1,13 +1,13 @@
 package com.mallinapps.designdomain.domain.timetable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,12 +38,7 @@ public class TimetableWeekEntity extends Versioned {
     @JoinColumn(name = "grade_id")
     private GradeEntity grade;
 
-    @ManyToMany
-    @JoinTable(
-            schema = "timetable",
-            name = "timetable_week_day",
-            joinColumns = @JoinColumn(name = "timetable_week_id"),
-            inverseJoinColumns = @JoinColumn(name = "timetable_day_id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "week", orphanRemoval = true)
     private List<TimetableDayEntity> timetableDays;
 
 }

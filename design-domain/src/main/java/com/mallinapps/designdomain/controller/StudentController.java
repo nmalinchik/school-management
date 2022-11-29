@@ -7,6 +7,7 @@ import com.mallinapps.commondto.dto.student.StudentList;
 import com.mallinapps.designdomain.controller.api.CrudApi;
 import com.mallinapps.designdomain.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,23 +19,23 @@ public class StudentController implements CrudApi<StudentList, Student> {
     private final StudentService service;
 
     @Override
-    public StudentList getList(final Integer page, final Integer size) {
-        return service.getList(page, size);
+    public ResponseEntity<StudentList> getList(final Integer page, final Integer size) {
+        return ResponseEntity.ok().body(service.getList(page, size));
     }
 
     @Override
-    public Student findById(final UUID id) {
-        return service.findById(id);
+    public ResponseEntity<Student> findById(final UUID id) {
+        return ResponseEntity.ok().body(service.findById(id));
     }
 
     @Override
-    public Student create(final Student position) {
-        return service.create(position);
+    public ResponseEntity<Student> create(final Student student) {
+        return ResponseEntity.ok().body(service.create(student));
     }
 
     @Override
-    public Student update(final UUID id, final Student position) {
-        return service.update(id, position);
+    public ResponseEntity<Student> update(final UUID id, final Student student) {
+        return ResponseEntity.ok().body(service.update(id, student));
     }
 
     @Override

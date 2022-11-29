@@ -4,9 +4,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import com.mallinapps.commondto.dto.student.Grade;
+import lombok.Getter;
+import lombok.Setter;
 
-public record TimetableDay(UUID id,
-                           LocalDate dayDate,
-                           Grade grade,
-                           List<TimetableLesson> timetableLessons) {}
+@Getter
+@Setter
+public class TimetableDay {
+    private UUID id;
+    private LocalDate dayDate;
+    private List<TimetableLesson> timetableLessons;
+}

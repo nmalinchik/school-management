@@ -1,8 +1,15 @@
 package com.mallinapps.designdomain.mapper;
 
+import java.time.LocalDate;
+
 import com.mallinapps.commondto.dto.timetable.TimetableDay;
+import com.mallinapps.commondto.dto.timetable.TimetableDayShort;
 import com.mallinapps.commondto.dto.timetable.TimetableLesson;
+import com.mallinapps.commondto.dto.timetable.TimetableLessonShort;
 import com.mallinapps.commondto.dto.timetable.TimetableWeek;
+import com.mallinapps.commondto.dto.timetable.TimetableWeekShort;
+import com.mallinapps.designdomain.domain.lesson.LessonEntity;
+import com.mallinapps.designdomain.domain.student.GradeEntity;
 import com.mallinapps.designdomain.domain.timetable.TimetableDayEntity;
 import com.mallinapps.designdomain.domain.timetable.TimetableLessonEntity;
 import com.mallinapps.designdomain.domain.timetable.TimetableWeekEntity;
@@ -21,10 +28,14 @@ public interface TimetableMapper {
 
     TimetableDay toTimetableDay(TimetableDayEntity entity);
 
-    @AfterMapping
-    default void updateLessons(@MappingTarget TimetableDay day) {
-        day.timetableLessons().forEach(l -> l.setDay(day));
-    }
+    @Mapping(target = "id", source = "timetableDay.id")
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "creationDate", ignore = true)
+    @Mapping(target = "lastUpdatedBy", ignore = true)
+    @Mapping(target = "lastUpdateDate", ignore = true)
+    @Mapping(target = "version", ignore = true)
+    @Mapping(target = "timetableLessons", ignore = true)
+    TimetableDayEntity toTimetableDayEntity(TimetableDayShort timetableDay, TimetableWeekEntity week);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
@@ -32,9 +43,9 @@ public interface TimetableMapper {
     @Mapping(target = "lastUpdatedBy", ignore = true)
     @Mapping(target = "lastUpdateDate", ignore = true)
     @Mapping(target = "version", ignore = true)
-    TimetableDayEntity toTimetableDayEntity(TimetableDay timetableDay);
+    @Mapping(target = "timetableLessons", ignore = true)
+    TimetableDayEntity updateTimetableDayEntity(TimetableDayShort timetableDay, @MappingTarget TimetableDayEntity entity, TimetableWeekEntity week);
 
-    @Mapping(target = "day", ignore = true)
     TimetableLesson toTimetableLesson(TimetableLessonEntity entity);
 
     @Mapping(target = "id", ignore = true)
@@ -43,9 +54,7 @@ public interface TimetableMapper {
     @Mapping(target = "lastUpdatedBy", ignore = true)
     @Mapping(target = "lastUpdateDate", ignore = true)
     @Mapping(target = "version", ignore = true)
-    TimetableLessonEntity toTimetableLessonEntity(TimetableLesson timetableLesson);
-
-    TimetableWeek toTimetableWeek(TimetableWeekEntity entity);
+    TimetableLessonEntity toTimetableLessonEntity(TimetableLessonShort timetableLesson, TimetableDayEntity day, LessonEntity lesson);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
@@ -53,6 +62,33 @@ public interface TimetableMapper {
     @Mapping(target = "lastUpdatedBy", ignore = true)
     @Mapping(target = "lastUpdateDate", ignore = true)
     @Mapping(target = "version", ignore = true)
-    TimetableWeekEntity toTimetableWeekEntity(TimetableWeek timetableWeek);
+    TimetableLessonEntity updateTimetableLessonEntity(TimetableLessonShort timetableLesson, @MappingTarget TimetableLessonEntity entity, TimetableDayEntity day, LessonEntity lesson);
+
+    TimetableWeek toTimetableWeek(TimetableWeekEntity entity);
+
+    @Mapping(target = "id", source = "dto.id")
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "creationDate", ignore = true)
+    @Mapping(target = "lastUpdatedBy", ignore = true)
+    @Mapping(target = "lastUpdateDate", ignore = true)
+    @Mapping(target = "version", ignore = true)
+    @Mapping(target = "timetableDays", ignore = true)
+    @Mapping(target = "grade", source = "grade")
+    TimetableWeekEntity toTimetableWeekEntity(TimetableWeekShort dto, GradeEntity grade);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "creationDate", ignore = true)
+    @Mapping(target = "lastUpdatedBy", ignore = true)
+    @Mapping(target = "lastUpdateDate", ignore = true)
+    @Mapping(target = "version", ignore = true)
+    @Mapping(target = "timetableDays", ignore = true)
+    @Mapping(target = "grade", source = "grade")
+    TimetableWeekEntity updateTimetableWeekEntity(TimetableWeekShort dto, @MappingTarget TimetableWeekEntity entity, GradeEntity grade);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "timetableDays", ignore = true)
+    @Mapping(target = "gradeId", source = "entity.grade.id")
+    TimetableWeekShort toCopyTimetableWeekShort(TimetableWeekEntity entity, LocalDate startDate, LocalDate endDate);
 
 }

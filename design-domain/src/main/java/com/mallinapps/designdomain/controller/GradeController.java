@@ -7,6 +7,7 @@ import com.mallinapps.commondto.dto.student.GradeList;
 import com.mallinapps.designdomain.controller.api.CrudApi;
 import com.mallinapps.designdomain.service.GradeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,23 +19,23 @@ public class GradeController implements CrudApi<GradeList, Grade> {
     private final GradeService service;
 
     @Override
-    public GradeList getList(final Integer page, final Integer size) {
-        return service.getList(page, size);
+    public ResponseEntity<GradeList> getList(final Integer page, final Integer size) {
+        return ResponseEntity.ok().body(service.getList(page, size));
     }
 
     @Override
-    public Grade findById(final UUID id) {
-        return service.findById(id);
+    public ResponseEntity<Grade> findById(final UUID id) {
+        return ResponseEntity.ok().body(service.findById(id));
     }
 
     @Override
-    public Grade create(final Grade position) {
-        return service.create(position);
+    public ResponseEntity<Grade> create(final Grade grade) {
+        return ResponseEntity.ok().body(service.create(grade));
     }
 
     @Override
-    public Grade update(final UUID id, final Grade position) {
-        return service.update(id, position);
+    public ResponseEntity<Grade> update(final UUID id, final Grade grade) {
+        return ResponseEntity.ok().body(service.update(id, grade));
     }
 
     @Override

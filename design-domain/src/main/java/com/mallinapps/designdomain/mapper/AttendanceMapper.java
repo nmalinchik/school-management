@@ -13,7 +13,7 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.ERROR,
-        uses = {EmployeeMapper.class, TimetableMapper.class, StudentMapper.class},
+        uses = {EmployeeMapper.class, TimetableMapper.class, StudentMapper.class, LessonMapper.class},
         builder = @Builder(disableBuilder = true))
 public interface AttendanceMapper {
 
@@ -30,6 +30,7 @@ public interface AttendanceMapper {
     @Mapping(target = "lastUpdatedBy", ignore = true)
     @Mapping(target = "lastUpdateDate", ignore = true)
     @Mapping(target = "version", ignore = true)
+    @Mapping(target = "lesson", ignore = true) //todo fix it in attendance service
     AttendanceEntity toAttendanceEntity(Attendance attendance);
 
     AttendancePresence toAttendancePresence(AttendancePresenceEntity entity);
