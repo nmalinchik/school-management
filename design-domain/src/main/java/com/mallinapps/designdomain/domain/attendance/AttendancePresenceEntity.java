@@ -21,7 +21,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(schema = "attendance", name = "attendance_presence")
-public class AttendancePresence extends BusinessEntity {
+public class AttendancePresenceEntity extends BusinessEntity {
 
     @Column(name = "is_present")
     private Boolean present;

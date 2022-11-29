@@ -1,12 +1,13 @@
 package com.mallinapps.designdomain.domain.student;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import com.mallinapps.designdomain.domain.base.BusinessEntity;
-import com.mallinapps.designdomain.domain.enums.Grade;
+import com.mallinapps.designdomain.domain.enums.Grades;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +24,12 @@ import lombok.experimental.SuperBuilder;
 public class GradeEntity extends BusinessEntity {
 
     @Enumerated(EnumType.STRING)
-    private Grade grade;
-    private String letter;
+    @Column(name = "grade")
+    private Grades grade;
 
+    @Column(name = "letter")
+    private String letter;
+        //todo Добавить unique на grade + letter
     //todo добавить классного руководителя
 
 }

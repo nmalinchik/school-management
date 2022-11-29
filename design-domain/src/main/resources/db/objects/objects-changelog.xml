@@ -9,11 +9,9 @@
     <include file="employee/position.sql"               relativeToChangelogFile="true"/>
     <include file="employee/employee.sql"               relativeToChangelogFile="true"/>
     <include file="academicperformance/mark.sql"        relativeToChangelogFile="true"/>
+    <include file="timetable/timetable_week.sql"        relativeToChangelogFile="true"/>
     <include file="timetable/timetable_day.sql"         relativeToChangelogFile="true"/>
     <include file="timetable/timetable_lesson.sql"      relativeToChangelogFile="true"/>
-    <include file="timetable/timetable_day_lesson.sql"  relativeToChangelogFile="true"/>
-    <include file="timetable/timetable_week.sql"        relativeToChangelogFile="true"/>
-    <include file="timetable/timetable_week_day.sql"    relativeToChangelogFile="true"/>
     <include file="attendance/attendance.sql"           relativeToChangelogFile="true"/>
     <include file="attendance/attendance_presence.sql"  relativeToChangelogFile="true"/>
 

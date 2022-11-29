@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(schema = "employee", name = "position")
-public class Position extends BusinessEntity {
+public class PositionEntity extends BusinessEntity {
 
     @Column(name = "title", unique = true)
     private String title;

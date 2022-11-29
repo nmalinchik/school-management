@@ -41,10 +41,6 @@ public class TimetableLessonEntity extends Versioned {
     private LessonPosition position;
 
     @ManyToOne
-    @JoinColumn(name = "grade_id")
-    private GradeEntity gradeEntity;
-
-    @ManyToOne
     @JoinColumn(name = "lesson_id")
     private LessonEntity lesson;
 
