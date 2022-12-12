@@ -5,6 +5,7 @@ import java.util.List;
 import com.mallinapps.commondto.dto.common.CommonPageResource;
 import com.mallinapps.commondto.dto.employee.Employee;
 import com.mallinapps.commondto.dto.employee.EmployeeList;
+import com.mallinapps.commondto.dto.employee.EmployeeShort;
 import com.mallinapps.commondto.dto.employee.Position;
 import com.mallinapps.commondto.dto.employee.PositionList;
 import com.mallinapps.designdomain.common.PageRequest;
@@ -43,7 +44,7 @@ public interface EmployeeMapper {
     @Mapping(target = "lastUpdatedBy", ignore = true)
     @Mapping(target = "lastUpdateDate", ignore = true)
     @Mapping(target = "version", ignore = true)
-    EmployeeEntity toEmployeeEntity(Employee employee);
+    EmployeeEntity toEmployeeEntity(EmployeeShort employee, PositionEntity position, PositionEntity extraPosition);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
@@ -51,7 +52,7 @@ public interface EmployeeMapper {
     @Mapping(target = "lastUpdatedBy", ignore = true)
     @Mapping(target = "lastUpdateDate", ignore = true)
     @Mapping(target = "version", ignore = true)
-    EmployeeEntity updateEmployeeEntity(Employee dto, @MappingTarget EmployeeEntity entity);
+    EmployeeEntity updateEmployeeEntity(EmployeeShort dto, @MappingTarget EmployeeEntity entity, PositionEntity position, PositionEntity extraPosition);
 
     default PositionList toPositionList(List<PositionEntity> positionEntities, PageRequest pageRequest) {
         return new PositionList(positionEntities.stream()

@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.mallinapps.commondto.dto.student.Student;
 import com.mallinapps.commondto.dto.student.StudentList;
+import com.mallinapps.commondto.dto.student.StudentShort;
 import com.mallinapps.designdomain.common.PageRequest;
 import com.mallinapps.designdomain.domain.student.StudentEntity;
 import com.mallinapps.designdomain.mapper.StudentMapper;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentService extends CrudService<Student, StudentEntity> {
 
     private final StudentMapper mapper;
+    private final GradeService gradeService;
 
     @Transactional(readOnly = true)
     public StudentList getList(Integer page, Integer size) {
@@ -28,17 +30,17 @@ public class StudentService extends CrudService<Student, StudentEntity> {
     }
 
     @Transactional
-    public Student create(final Student student) {
-        checkNotNullFields(student.grade().id(), "grade");
-        final var studentEntity = mapper.toStudentEntity(student);
+    public Student create(final StudentShort student) {
+        checkNotNullFields(student.gradeId(), "grade");
+        final var studentEntity = mapper.toStudentEntity(student, gradeService.findEntityById(student.gradeId()));
         var saved = repository.save(studentEntity);
         return mapper.toStudent(saved);
     }
 
     @Transactional
-    public Student update(final UUID id, final Student student) {
-        checkNotNullFields(student.grade().id(), "grade");
-        final var entity = mapper.updateStudentEntity(student, findEntityById(id));
+    public Student update(final UUID id, final StudentShort student) {
+        checkNotNullFields(student.gradeId(), "grade");
+        final var entity = mapper.updateStudentEntity(student, findEntityById(id), gradeService.findEntityById(student.gradeId()));
         var saved = repository.save(entity);
         return mapper.toStudent(saved);
     }

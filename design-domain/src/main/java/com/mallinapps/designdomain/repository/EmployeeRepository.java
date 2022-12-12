@@ -15,4 +15,9 @@ public interface EmployeeRepository extends GenericRepository<EmployeeEntity> {
             "left join fetch e.extraPosition")
     List<EmployeeEntity> findAll();
 
+    @Query(value = "SELECT e from EmployeeEntity e " +
+            "where e.position.id=:positionId " +
+            "or e.extraPosition.id=:positionId")
+    List<EmployeeEntity> findByPositions(UUID positionId);
+
 }

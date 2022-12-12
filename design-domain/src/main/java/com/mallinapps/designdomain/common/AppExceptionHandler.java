@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 import com.mallinapps.designdomain.controller.api.common.ErrorResponse;
+import com.mallinapps.designdomain.exception.CantBeDeletedException;
 import com.mallinapps.designdomain.exception.EmptyNecessaryFieldException;
 import com.mallinapps.designdomain.exception.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,12 @@ public class AppExceptionHandler {
 
     @ExceptionHandler(EmptyNecessaryFieldException.class)
     public ResponseEntity<ErrorResponse> handleEmptyNecessaryFieldException(HttpServletRequest request, EmptyNecessaryFieldException exception) {
+        var error = createErrorResponse(exception, HttpStatus.BAD_REQUEST.toString(), request.getRequestURI());
+        return new ResponseEntity<>(error, null, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CantBeDeletedException.class)
+    public ResponseEntity<ErrorResponse> handleCantBeDeletedException(HttpServletRequest request, CantBeDeletedException exception) {
         var error = createErrorResponse(exception, HttpStatus.BAD_REQUEST.toString(), request.getRequestURI());
         return new ResponseEntity<>(error, null, HttpStatus.BAD_REQUEST);
     }

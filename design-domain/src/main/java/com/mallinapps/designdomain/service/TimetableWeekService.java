@@ -1,20 +1,18 @@
 package com.mallinapps.designdomain.service;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.IsoFields;
-import java.time.temporal.TemporalAdjusters;
-import java.util.Calendar;
 import java.util.UUID;
 
 import com.mallinapps.commondto.dto.timetable.TimetableWeek;
 import com.mallinapps.commondto.dto.timetable.TimetableWeekShort;
 import com.mallinapps.designdomain.domain.student.GradeEntity;
 import com.mallinapps.designdomain.domain.timetable.TimetableWeekEntity;
+import com.mallinapps.designdomain.exception.EntityNotFoundException;
 import com.mallinapps.designdomain.mapper.TimetableMapper;
+import com.mallinapps.designdomain.repository.GradeRepository;
+import com.mallinapps.designdomain.repository.TimetableWeekRepository;
 import com.mallinapps.designdomain.util.DateUtils;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Call;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TimetableWeekService extends CrudService<TimetableWeek, TimetableWeekEntity>{
 
     private final TimetableMapper mapper;
-    private final GradeService gradeService;
+    private final GradeRepository gradeRepository;
     private final TimetableDayService dayService;
 
     @Override
@@ -58,6 +56,12 @@ public class TimetableWeekService extends CrudService<TimetableWeek, TimetableWe
 
     private GradeEntity findGrade(final TimetableWeekShort dto) {
         checkNotNullFields(dto.gradeId(), "grade");
-        return gradeService.findEntityById(dto.gradeId());
+        return gradeRepository.findById(dto.gradeId())
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Entity with id = %s, not found", dto.gradeId())));
+    }
+
+    @Transactional
+    public void deleteSchedulesForGrade(final UUID id) {
+        ((TimetableWeekRepository) repository).deleteAllByGradeId(id);
     }
 }

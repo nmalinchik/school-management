@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: postgres:9.6
+    container_name: sch-db
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - application
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "user"
+
+networks:
+  application:
+    driver: bridge

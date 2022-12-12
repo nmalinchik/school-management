@@ -4,7 +4,9 @@ import java.util.UUID;
 
 import com.mallinapps.commondto.dto.employee.Employee;
 import com.mallinapps.commondto.dto.employee.EmployeeList;
+import com.mallinapps.commondto.dto.employee.EmployeeShort;
 import com.mallinapps.designdomain.controller.api.CrudApi;
+import com.mallinapps.designdomain.controller.api.EmployeeApi;
 import com.mallinapps.designdomain.controller.api.common.ErrorResponse;
 import com.mallinapps.designdomain.controller.api.common.OpenApi;
 import com.mallinapps.designdomain.service.EmployeeService;
@@ -32,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/employee")
-public class EmployeeController implements CrudApi<EmployeeList, Employee> {
+public class EmployeeController implements EmployeeApi {
 
     private final EmployeeService employeeService;
 
@@ -56,7 +58,7 @@ public class EmployeeController implements CrudApi<EmployeeList, Employee> {
     @ApiResponse(responseCode = OpenApi.ProblemSchema.StatusCode.OK, description = OpenApi.Descriptions.EMPLOYEE_CREATE,
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Employee.class)))
     @Operation(summary = "Create new employee")
-    public ResponseEntity<Employee> create(final Employee employee) {
+    public ResponseEntity<Employee> create(final EmployeeShort employee) {
         return ResponseEntity.ok().body(employeeService.create(employee));
     }
 
@@ -64,7 +66,7 @@ public class EmployeeController implements CrudApi<EmployeeList, Employee> {
     @ApiResponse(responseCode = OpenApi.ProblemSchema.StatusCode.OK, description = OpenApi.Descriptions.EMPLOYEE_UPDATE,
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Employee.class)))
     @Operation(summary = "Update the employee")
-    public ResponseEntity<Employee> update(final UUID id, final Employee employee) {
+    public ResponseEntity<Employee> update(final UUID id, final EmployeeShort employee) {
         return ResponseEntity.ok().body(employeeService.update(id, employee));
     }
 

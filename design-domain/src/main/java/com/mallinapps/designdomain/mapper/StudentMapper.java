@@ -7,6 +7,7 @@ import com.mallinapps.commondto.dto.student.Grade;
 import com.mallinapps.commondto.dto.student.GradeList;
 import com.mallinapps.commondto.dto.student.Student;
 import com.mallinapps.commondto.dto.student.StudentList;
+import com.mallinapps.commondto.dto.student.StudentShort;
 import com.mallinapps.designdomain.common.PageRequest;
 import com.mallinapps.designdomain.domain.student.GradeEntity;
 import com.mallinapps.designdomain.domain.student.StudentEntity;
@@ -44,13 +45,23 @@ public interface StudentMapper {
     @Mapping(target = "version", ignore = true)
     StudentEntity toStudentEntity(Student student);
 
+    @Mapping(target = "id", source = "student.id")
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "creationDate", ignore = true)
+    @Mapping(target = "lastUpdatedBy", ignore = true)
+    @Mapping(target = "lastUpdateDate", ignore = true)
+    @Mapping(target = "version", ignore = true)
+    @Mapping(target = "grade", source = "grade")
+    StudentEntity toStudentEntity(StudentShort student, GradeEntity grade);
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
     @Mapping(target = "lastUpdatedBy", ignore = true)
     @Mapping(target = "lastUpdateDate", ignore = true)
     @Mapping(target = "version", ignore = true)
-    StudentEntity updateStudentEntity(Student student, @MappingTarget StudentEntity entity);
+    @Mapping(target = "grade", source = "grade")
+    StudentEntity updateStudentEntity(StudentShort student, @MappingTarget StudentEntity entity, GradeEntity grade);
 
     default GradeList toGradeList(List<GradeEntity> gradeEntities, PageRequest pageRequest) {
         return new GradeList(gradeEntities.stream()

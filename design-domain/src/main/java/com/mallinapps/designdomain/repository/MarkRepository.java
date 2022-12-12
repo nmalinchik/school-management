@@ -1,6 +1,7 @@
 package com.mallinapps.designdomain.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.mallinapps.designdomain.domain.academicperformance.MarkEntity;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,7 @@ public interface MarkRepository extends GenericRepository<MarkEntity> {
             "left join fetch m.student " +
             "left join fetch m.teacher")
     List<MarkEntity> findAll();
+
+    List<MarkEntity> deleteAllByLessonId(UUID lessonId);
 
 }
